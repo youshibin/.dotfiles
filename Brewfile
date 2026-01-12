@@ -1,0 +1,46 @@
+# Brewfile - Homebrew Bundle
+# Install all tools with: brew bundle install
+
+# ============================================================================
+# TAPS
+# ============================================================================
+tap "homebrew/bundle"
+
+# ============================================================================
+# TERMINAL & SHELL
+# ============================================================================
+brew "zsh"                  # Shell (usually pre-installed on macOS)
+brew "starship"             # Cross-shell prompt
+brew "zellij"               # Terminal multiplexer
+cask "wezterm"              # GPU-accelerated terminal emulator
+
+# ============================================================================
+# EDITOR
+# ============================================================================
+brew "neovim"               # Hyperextensible Vim-based text editor
+
+# ============================================================================
+# DEVELOPMENT TOOLS & UTILITIES
+# ============================================================================
+brew "direnv"               # Directory-based environment variables
+brew "fzf"                  # Fuzzy finder
+brew "git"                  # Distributed version control system
+brew "htop"                 # Interactive process viewer
+brew "jq"                   # JSON processor
+brew "stow"                 # Symlink farm manager (for dotfiles)
+brew "wget"                 # File downloader (alternative to curl)
+brew "yq"                   # YAML processor
+
+# ============================================================================
+# MODERN CLI REPLACEMENTS
+# ============================================================================
+brew "eza"                  # Modern replacement for ls
+brew "bat"                  # Modern replacement for cat
+brew "fd"                   # Modern replacement for find
+brew "ripgrep"              # Fast grep alternative (rg)
+brew "tree"                 # Display directory tree
+
+# ============================================================================
+# FONTS
+# ============================================================================
+cask "font-jetbrains-mono-nerd-font"  # JetBrains Mono with Nerd Font icons

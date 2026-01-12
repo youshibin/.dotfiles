@@ -1,0 +1,136 @@
+# ~/.zshenv.local.example
+# Copy this file to ~/.zshenv.local and uncomment the PATH additions you need
+# This file is NOT tracked in git - use it for machine-specific environment variables
+
+# ============================================================================
+# PATH ADDITIONS - Machine Specific
+# ============================================================================
+# Add paths in reverse priority order (last added = highest priority)
+
+# ----------------------------------------------------------------------------
+# VERSION MANAGERS
+# ----------------------------------------------------------------------------
+
+# Node.js (nvm)
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && source "/opt/homebrew/opt/nvm/nvm.sh"
+
+# Node.js (volta - alternative to nvm)
+# export VOLTA_HOME="$HOME/.volta"
+# export PATH="$VOLTA_HOME/bin:$PATH"
+
+# Python (pyenv)
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init --path)"
+
+# Ruby (rbenv)
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init - zsh)"
+
+# Go
+# export GOPATH="$HOME/go"
+# export PATH="$PATH:$GOPATH/bin"
+
+# Rust (cargo)
+# export PATH="$HOME/.cargo/bin:$PATH"
+
+# Terraform (tfenv)
+# export PATH="$HOME/.tfenv/bin:$PATH"
+
+# ----------------------------------------------------------------------------
+# LANGUAGE RUNTIMES (Homebrew-installed)
+# ----------------------------------------------------------------------------
+
+# Java
+# export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+# export JAVA_HOME="/opt/homebrew/opt/openjdk@11"
+# export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
+
+# LLVM/Clang
+# export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
+# GCC
+# export PATH="/opt/homebrew/opt/gcc/bin:$PATH"
+
+# PostgreSQL
+# export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/postgresql@16/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/postgresql@16/include"
+
+# ----------------------------------------------------------------------------
+# CLOUD & DEVELOPMENT TOOLS
+# ----------------------------------------------------------------------------
+
+# AWS CLI configuration
+# export AWS_PROFILE="default"
+# export AWS_REGION="us-east-1"
+
+# Google Cloud SDK
+# source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+# source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+# Kubernetes
+# export KUBECONFIG="$HOME/.kube/config"
+
+# Docker (colima)
+# export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
+
+# ----------------------------------------------------------------------------
+# MOBILE DEVELOPMENT
+# ----------------------------------------------------------------------------
+
+# Android SDK
+# export ANDROID_HOME="$HOME/Library/Android/sdk"
+# export PATH="$PATH:$ANDROID_HOME/emulator"
+# export PATH="$PATH:$ANDROID_HOME/tools"
+# export PATH="$PATH:$ANDROID_HOME/tools/bin"
+# export PATH="$PATH:$ANDROID_HOME/platform-tools"
+
+# Flutter
+# export PATH="$PATH:$HOME/Library/flutter/bin"
+
+# ----------------------------------------------------------------------------
+# WORK-SPECIFIC TOOLS
+# ----------------------------------------------------------------------------
+
+# Example: Company-specific CLI tools
+# export PATH="$HOME/work/bin:$PATH"
+# export COMPANY_ENV="production"
+# export COMPANY_API_KEY="your-key-here"
+
+# Example: Custom scripts directory
+# export PATH="$HOME/scripts:$PATH"
+
+# ----------------------------------------------------------------------------
+# OTHER ENVIRONMENT VARIABLES
+# ----------------------------------------------------------------------------
+
+# Increase history size for this machine
+# export HISTSIZE=100000
+# export SAVEHIST=100000
+
+# Set default browser
+# export BROWSER="open"
+
+# GPG configuration
+# export GPG_TTY=$(tty)
+
+# Enable colored output for specific tools
+# export CLICOLOR=1
+# export LSCOLORS=ExFxBxDxCxegedabagacad
+
+# ----------------------------------------------------------------------------
+# MACHINE IDENTIFICATION (Optional)
+# ----------------------------------------------------------------------------
+# Useful for conditional logic in scripts
+
+# export MACHINE_TYPE="work"  # or "personal"
+# export MACHINE_NAME="work-macbook"  # or whatever you like
+
+# Then in scripts, you can do:
+# if [[ "$MACHINE_TYPE" == "work" ]]; then
+#   # work-specific stuff
+# fi

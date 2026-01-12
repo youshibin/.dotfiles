@@ -1,0 +1,200 @@
+# Brewfile.local.example
+# Copy this file to Brewfile.local and uncomment the tools you need
+# This file is NOT tracked in git - use it for machine-specific installations
+
+# ============================================================================
+# DEVELOPMENT UTILITIES
+# ============================================================================
+# General development tools and utilities
+
+# HTTP & API Tools
+# brew "httpie"                 # User-friendly HTTP client
+# cask "postman"                # API development platform
+# brew "vegeta"                 # HTTP load testing tool
+
+# Version Control
+# brew "gh"                     # GitHub CLI
+# brew "lazygit"                # Git TUI
+
+# Process Management
+# brew "glances"                # System monitoring tool
+
+# ============================================================================
+# VERSION MANAGERS & LANGUAGE RUNTIMES
+# ============================================================================
+# Choose the version managers and languages you need for this machine
+
+# Node.js
+# brew "nvm"                    # Node version manager
+# brew "node"                   # Node.js runtime directly
+# brew "volta"                  # Alternative: JavaScript tool manager
+
+# Python
+# brew "pyenv"                  # Python version manager
+# brew "python@3.12"            # Specific Python version
+# brew "python@3.13"            # Latest Python version
+
+# Ruby
+# brew "rbenv"                  # Ruby version manager
+# brew "ruby-build"             # Install Ruby versions
+
+# Go
+# brew "go"                     # Go programming language
+
+# Terraform
+# brew "tfenv"                  # Terraform version manager
+
+# ============================================================================
+# BUILD TOOLS & COMPILERS
+# ============================================================================
+# Compilers and build systems
+
+# Build Systems
+# brew "cmake"                  # Cross-platform build system
+# brew "automake"               # Build automation
+# brew "autoconf"               # Configure script generator
+
+# Compilers
+# brew "gcc"                    # GNU Compiler Collection
+# brew "llvm"                   # LLVM compiler infrastructure
+
+# ============================================================================
+# LANGUAGE-SPECIFIC TOOLS
+# ============================================================================
+
+# Scala/Java
+# brew "sbt"                    # Scala build tool
+# brew "scala"                  # Scala language
+# brew "openjdk"                # OpenJDK
+# brew "openjdk@11"             # Java 11
+
+# .NET
+# brew "dotnet"                 # .NET SDK
+
+# ============================================================================
+# CONTAINER & ORCHESTRATION
+# ============================================================================
+# Tools for container and Kubernetes development
+
+# Docker
+# brew "docker"                 # Docker CLI
+# brew "docker-compose"         # Docker Compose
+# brew "docker-buildx"          # Docker Buildx
+# brew "colima"                 # Container runtime for macOS (Docker Desktop alternative)
+
+# Kubernetes
+# brew "kubernetes-cli"         # kubectl
+# brew "helm"                   # Kubernetes package manager
+# brew "k9s"                    # Kubernetes TUI
+# brew "kubectx"                # Switch between clusters/namespaces
+# brew "kind"                   # Kubernetes in Docker
+# brew "minikube"               # Local Kubernetes cluster
+
+# ============================================================================
+# CLOUD & INFRASTRUCTURE
+# ============================================================================
+# Cloud provider CLIs and infrastructure tools
+
+# AWS
+# brew "awscli"                 # AWS command line interface
+# brew "s3cmd"                  # S3 tool
+
+# Serverless
+# brew "serverless"             # Serverless framework
+
+# Other Infrastructure
+# cask "consul"                 # Service mesh
+
+# ============================================================================
+# DATABASES & DATA TOOLS
+# ============================================================================
+# Database servers and clients
+
+# PostgreSQL
+# brew "postgresql@16"          # PostgreSQL database server
+# brew "postgresql@14"          # Older PostgreSQL version
+# cask "pgadmin4"               # PostgreSQL GUI
+
+# Other Databases
+# brew "redis"                  # Redis in-memory database
+# brew "influxdb"               # Time-series database
+# brew "duckdb"                 # Analytics database
+
+# Database Tools
+# brew "flyway"                 # Database migration tool
+
+# ============================================================================
+# PROTOCOL BUFFERS & CODE GENERATION
+# ============================================================================
+# Protocol Buffers and code generation tools
+
+# brew "protobuf"               # Protocol buffers
+# brew "buf"                    # Modern Protobuf tooling
+# brew "mockery"                # Mock generator for Go
+# brew "protoc-gen-go"          # Go code generator for protobuf
+
+# ============================================================================
+# STREAMING & MESSAGE QUEUES
+# ============================================================================
+# Message brokers and streaming platforms
+
+# brew "kafka"                  # Apache Kafka
+# brew "nsq"                    # Realtime distributed messaging
+
+# ============================================================================
+# OBSERVABILITY & MONITORING
+# ============================================================================
+# Monitoring and observability tools
+
+# brew "thanos"                 # Prometheus long-term storage
+# brew "grafana"                # Metrics visualization
+# brew "prometheus"             # Monitoring system
+
+# ============================================================================
+# SECURITY & SECRETS
+# ============================================================================
+# Security and secrets management tools
+
+# cask "1password-cli"          # 1Password CLI
+# brew "gnupg"                  # GPG encryption
+# brew "age"                    # Modern encryption tool
+# cask "ngrok"                  # Secure tunneling
+
+# ============================================================================
+# EDITORS & IDEs
+# ============================================================================
+# Additional editors beyond Neovim
+
+# cask "visual-studio-code"     # VS Code
+# cask "sublime-text"           # Sublime Text
+# cask "intellij-idea"          # IntelliJ IDEA
+
+# ============================================================================
+# GNU UTILITIES (macOS replacements)
+# ============================================================================
+# GNU versions of common tools (useful for Linux compatibility)
+
+# brew "coreutils"              # GNU core utilities
+# brew "grep"                   # GNU grep
+# brew "gnu-sed"                # GNU sed
+# brew "gawk"                   # GNU awk
+# brew "findutils"              # GNU find, xargs, locate
+
+# ============================================================================
+# VIRTUALIZATION & EMULATION
+# ============================================================================
+# Virtual machines and emulation
+
+# brew "qemu"                   # Generic machine emulator
+# brew "lima"                   # Linux virtual machines
+# brew "podman"                 # Alternative to Docker
+# brew "podman-compose"         # Podman compose
+
+# ============================================================================
+# WORK-SPECIFIC TOOLS
+# ============================================================================
+# Add your work-specific tools here
+
+# Example:
+# brew "company-cli-tool"
+# cask "work-vpn-client"

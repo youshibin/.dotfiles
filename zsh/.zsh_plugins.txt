@@ -1,0 +1,16 @@
+# Antidote Plugin Configuration
+# Each line is a plugin to be loaded by Antidote
+# Format: username/repo or path/to/plugin
+
+# Oh-My-Zsh library components
+ohmyzsh/ohmyzsh path:lib
+
+# Oh-My-Zsh plugins
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+ohmyzsh/ohmyzsh path:plugins/command-not-found
+
+# External plugins
+zsh-users/zsh-completions
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting

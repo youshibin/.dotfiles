@@ -1,0 +1,68 @@
+# ~/.zshrc.local.example
+# Copy this file to ~/.zshrc.local and uncomment the sections you need
+# This file is NOT tracked in git - use it for machine-specific configuration
+
+# ============================================================================
+# JAVA CONFIGURATION
+# ============================================================================
+# Uncomment if you need Java 11
+# export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+# export CPPFLAGS="-I/opt/homebrew/opt/openjdk@11/include"
+
+# ============================================================================
+# ANDROID SDK
+# ============================================================================
+# Uncomment if you do Android development
+# export ANDROID_HOME="$HOME/Library/Android/sdk"
+# export PATH="$PATH:$ANDROID_HOME/tools"
+# export PATH="$PATH:$ANDROID_HOME/tools/bin"
+# export PATH="$PATH:$ANDROID_HOME/platform-tools"
+
+# ============================================================================
+# RVM (Ruby Version Manager)
+# ============================================================================
+# Uncomment if you use RVM
+# export PATH="$PATH:$HOME/.rvm/bin"
+# export rvm_silence_path_mismatch_check_flag=1
+#
+# if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+#   source "$HOME/.rvm/scripts/rvm"
+#
+#   # Manually set gem environment based on current Ruby
+#   if command -v rvm >/dev/null 2>&1; then
+#     local ruby_string="$(rvm current)"
+#     if [[ "$ruby_string" != "system" ]]; then
+#       export GEM_HOME="$HOME/.rvm/gems/$ruby_string"
+#       export GEM_PATH="$HOME/.rvm/gems/$ruby_string:$HOME/.rvm/gems/$ruby_string@global"
+#     fi
+#   fi
+# fi
+
+# ============================================================================
+# GCC / LLVM
+# ============================================================================
+# Uncomment if you need specific compiler versions
+# export PATH="/opt/homebrew/opt/gcc/bin:$PATH"
+# export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+# export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
+# ============================================================================
+# BZIP2
+# ============================================================================
+# Uncomment if you need bzip2 for compilation
+# export LDFLAGS="-L/opt/homebrew/opt/bzip2/lib $LDFLAGS"
+# export CPPFLAGS="-I/opt/homebrew/opt/bzip2/include $CPPFLAGS"
+
+# ============================================================================
+# WORK-SPECIFIC CONFIGURATIONS
+# ============================================================================
+# Add your work-specific aliases, functions, and environment variables here
+
+# Example work aliases:
+# alias work-vpn='sudo openconnect --protocol=gp vpn.company.com'
+# alias work-ssh='ssh user@work-server.com'
+
+# Example work environment variables:
+# export COMPANY_API_KEY="your-key-here"
+# export WORK_PROJECT_DIR="$HOME/work/projects"

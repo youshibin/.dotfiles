@@ -1,0 +1,172 @@
+# Starship Prompt Configuration
+# Docs: https://starship.rs/config/
+
+# Use custom format
+format = """
+(bold green)$username[@](bold white)$hostname[:](bold white)$directory$git_branch$git_status$git_state
+(bold green)$character"""
+
+# Timeout for starship to execute (milliseconds)
+command_timeout = 1000
+
+# ============================================================================
+# PROMPT CHARACTER
+# ============================================================================
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+# ============================================================================
+# USERNAME
+# ============================================================================
+[username]
+style_user = "bold magenta"
+style_root = "bold red"
+format = "[$user]($style)"
+disabled = false
+show_always = true
+
+# ============================================================================
+# HOSTNAME
+# ============================================================================
+[hostname]
+ssh_only = false
+format = "[$hostname](bold yellow)"
+disabled = false
+
+# ============================================================================
+# DIRECTORY
+# ============================================================================
+[directory]
+style = "bold cyan"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncation_length = 3
+truncate_to_repo = true
+read_only = " 🔒"
+
+# Special directory replacements
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+# ============================================================================
+# GIT
+# ============================================================================
+[git_branch]
+symbol = ""
+style = "bold red"
+format = " [git:\\(](bold purple)[$branch]($style)[\\)](bold purple)"
+
+[git_status]
+style = "bold red"
+format = "[ $all_status$ahead_behind]($style)"
+conflicted = "✖"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?"
+stashed = "≡"
+modified = "✗"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bold yellow"
+
+# ============================================================================
+# PROGRAMMING LANGUAGES
+# ============================================================================
+# Only show language version when in a project directory
+
+[nodejs]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+detect_extensions = ["js", "mjs", "cjs", "ts"]
+detect_files = ["package.json", ".node-version"]
+
+[python]
+symbol = " "
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "pyproject.toml", "requirements.txt"]
+
+[rust]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+detect_extensions = ["rs"]
+detect_files = ["Cargo.toml"]
+
+[golang]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+detect_extensions = ["go"]
+detect_files = ["go.mod", "go.sum"]
+
+[ruby]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+detect_extensions = ["rb"]
+detect_files = ["Gemfile", ".ruby-version"]
+
+[java]
+symbol = " "
+format = "via [$symbol($version )]($style)"
+detect_extensions = ["java", "class", "jar"]
+
+# ============================================================================
+# TOOLS & ENVIRONMENTS
+# ============================================================================
+[docker_context]
+symbol = " "
+format = "via [$symbol$context]($style) "
+disabled = false
+
+[package]
+symbol = "📦 "
+format = "is [$symbol$version]($style) "
+disabled = false
+
+# ============================================================================
+# COMMAND DURATION
+# ============================================================================
+# Show how long the last command took if it was over 2 seconds
+[cmd_duration]
+min_time = 2000
+format = "took [$duration](bold yellow) "
+show_milliseconds = false
+
+# ============================================================================
+# TIME
+# ============================================================================
+[time]
+disabled = true
+format = '🕙[\[ $time \]]($style) '
+time_format = "%T"
+
+# ============================================================================
+# MISC
+# ============================================================================
+[battery]
+disabled = true
+
+[memory_usage]
+disabled = true
+threshold = 75
+symbol = " "
+format = "via $symbol[$ram( | $swap)]($style) "
+
+# Disable modules we don't need
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[kubernetes]
+disabled = true
