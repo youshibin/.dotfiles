@@ -62,7 +62,7 @@ style = "bold red"
 format = " [git:\\(](bold purple)[$branch]($style)[\\)](bold purple)"
 
 [git_status]
-style = "bold red"
+style = "bold purple"
 format = "[ $all_status$ahead_behind]($style)"
 conflicted = "✖"
 ahead = "⇡${count}"
