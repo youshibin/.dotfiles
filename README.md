@@ -27,6 +27,8 @@ A portable, keyboard-focused terminal development environment optimized for prod
    ```bash
    ./install.sh
    ```
+   
+   **Note:** The script will prompt for your password (sudo) to change your default shell to zsh.
 
 3. **Restart your terminal or run**
    ```bash
@@ -39,21 +41,31 @@ A portable, keyboard-focused terminal development environment optimized for prod
 
 ```
 ~/.dotfiles/
-├── Brewfile                     # Core Homebrew dependencies
-├── Brewfile.local.example       # Template for machine-specific tools
 ├── install.sh                   # Installation script
 ├── .gitignore                   # Git ignore rules
 ├── README.md                    # This file
 │
+├── brew/
+│   └── .config/brew/
+│       ├── Brewfile               # Core Homebrew dependencies
+│       └── Brewfile.local.example # Template for machine-specific tools
+│
+├── make/
+│   └── .config/
+│       ├── Makefile             # Development environment management
+│       └── README.md            # Makefile documentation
+│
 ├── wezterm/
 │   └── .config/wezterm/
-│       └── wezterm.lua          # WezTerm configuration
+│       └── wezterm.lua          # WezTerm terminal emulator config
 │
 ├── zsh/
-│   ├── .zshrc                   # Main Zsh config
-│   ├── .zshenv                  # Environment variables
-│   ├── .zsh_plugins.txt         # Antidote plugin list
-│   └── .zshrc.local.example     # Example local overrides
+│   ├── .zshenv                  # Environment variables (sourced first)
+│   ├── .zshenv.local.example    # Example local environment overrides
+│   └── .config/zsh/
+│       ├── .zshrc               # Main Zsh config (interactive shells)
+│       ├── .zsh_plugins.txt     # Antidote plugin list
+│       └── .zshrc.local.example # Example local config overrides
 │
 ├── starship/
 │   └── .config/
@@ -75,6 +87,16 @@ A portable, keyboard-focused terminal development environment optimized for prod
         └── .stylua.toml         # Lua formatter config
 ```
 
+### XDG Base Directory Compliance
+
+This setup follows the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) to keep your home directory clean:
+
+- **Configuration**: `~/.config/` - All tool configs live here
+- **Data**: `~/.local/share/` - Application data (zsh history, antidote, etc.)
+- **Cache**: `~/.cache/` - Temporary cached data
+
+Notable exception: `.zshenv` lives at `~/.zshenv` (zsh requires this location for initial environment setup).
+
 ## How GNU Stow Works
 
 GNU Stow creates symlinks from your home directory to files in this repository:
@@ -90,7 +112,28 @@ This means:
 - Your home directory only contains symlinks (stays clean)
 - Changes are immediately reflected (no need to copy files)
 
-### Managing Dotfiles
+### Managing Dotfiles with Make
+
+Use the Makefile for convenient management:
+
+```bash
+# Stow all packages
+make -f ~/.config/Makefile stow
+
+# Stow specific packages
+make -f ~/.config/Makefile stow PACKAGES="zsh wezterm"
+
+# Unstow packages
+make -f ~/.config/Makefile unstow PACKAGES="nvim"
+
+# Verify symlinks
+make -f ~/.config/Makefile stow-check
+
+# See all available targets
+make -f ~/.config/Makefile help
+```
+
+### Manual Stow Commands
 
 ```bash
 # Install specific config
@@ -104,48 +147,49 @@ stow -D wezterm
 stow -R wezterm
 
 # Install all configs
-stow wezterm zsh starship zellij nvim
+stow brew make nvim starship wezterm zellij zsh
 ```
 
 ## Machine-Specific Configuration
 
-For machine-specific settings, use local override files:
+For machine-specific settings, use local override files (never committed to git):
 
 ### Zsh Local Overrides
 
 1. **Copy the example file**
    ```bash
-   cp ~/.dotfiles/zsh/.zshrc.local.example ~/.zshrc.local
+   cp ~/.dotfiles/zsh/.config/zsh/.zshrc.local.example ~/.config/zsh/.zshrc.local
    ```
 
-2. **Edit `~/.zshrc.local`** with your machine-specific configs
+2. **Edit `~/.config/zsh/.zshrc.local`** with your machine-specific configs
    - Work VPNs, SSH aliases
    - Company-specific environment variables
-   - Java, Android, RVM (if needed on this machine)
+   - Custom functions and aliases
 
 3. **Never commit `.zshrc.local`** (it's in `.gitignore`)
 
-### PATH Management (Environment Variables)
+### Environment Variables Local Overrides
 
-**For PATH modifications, use `.zshenv` files** (not `.zshrc`):
+**For PATH and environment variables, use `.zshenv.local`**:
 
-#### Common PATH → `.zshenv` (committed)
-Tools that should be on **every machine**:
+#### Common Environment → `.zshenv` (committed)
+Variables that should be on **every machine**:
 ```bash
 # Already configured in ~/.dotfiles/zsh/.zshenv:
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"  # Homebrew
 export PATH="$HOME/.local/bin:$PATH"                      # Local binaries
+export EDITOR='nvim'
 ```
 
-#### Machine-Specific PATH → `~/.zshenv.local` (NOT committed)
-Tools specific to **this machine only**:
+#### Machine-Specific Environment → `~/.zshenv.local` (NOT committed)
+Variables specific to **this machine only**:
 
 1. **Copy the example file**
    ```bash
    cp ~/.dotfiles/zsh/.zshenv.local.example ~/.zshenv.local
    ```
 
-2. **Edit `~/.zshenv.local`** and uncomment what you need
+2. **Edit `~/.zshenv.local`** and add what you need
    ```bash
    # Work Machine Example:
    export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
@@ -172,10 +216,10 @@ The main `Brewfile` contains only essential terminal tools. For machine-specific
 
 1. **Copy the example file**
    ```bash
-   cp ~/.dotfiles/Brewfile.local.example ~/Brewfile.local
+   cp ~/.dotfiles/brew/.config/brew/Brewfile.local.example ~/.config/brew/Brewfile.local
    ```
 
-2. **Edit `~/Brewfile.local`** and uncomment the tools you need
+2. **Edit `~/.config/brew/Brewfile.local`** and add the tools you need
    - Language runtimes (Node, Python, Go, Ruby)
    - Container tools (Docker, Kubernetes)
    - Cloud CLIs (AWS, GCP, Azure)
@@ -184,25 +228,26 @@ The main `Brewfile` contains only essential terminal tools. For machine-specific
 
 3. **Install the tools**
    ```bash
-   brew bundle install --file=~/Brewfile.local
+   make -f ~/.config/Makefile brew-bundle-install
+   # Or manually:
+   brew bundle install --file=~/.config/brew/Brewfile.local
    ```
 
-4. **Never commit `~/Brewfile.local`** (it's in `.gitignore`)
+4. **Never commit `Brewfile.local`** (it's in `.gitignore`)
 
 **Example - Work Machine**:
 ```ruby
-# ~/Brewfile.local
+# ~/.config/brew/Brewfile.local
 brew "kubernetes-cli"
 brew "helm"
 brew "awscli"
 brew "postgresql@16"
-brew "direnv"
 cask "visual-studio-code"
 ```
 
 **Example - Personal Machine**:
 ```ruby
-# ~/Brewfile.local
+# ~/.config/brew/Brewfile.local
 brew "node"
 brew "python@3.13"
 brew "docker"

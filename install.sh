@@ -53,10 +53,21 @@ command_exists() {
 backup_dotfiles() {
     print_header "Backing up existing dotfiles"
 
-    BACKUP_DIR="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
+    BACKUP_DIR="$HOME/.config/backups/$(date +%Y%m%d-%H%M%S)"
     mkdir -p "$BACKUP_DIR"
 
-    local files=(".zshrc" ".zshenv" ".config/wezterm" ".config/starship.toml" ".config/zellij" ".config/nvim")
+    # Backup both old-style (home directory) and new-style (XDG) configs
+    local files=(
+        ".zshrc"                    # Old-style zsh config in home
+        ".zshenv"                   # Environment file (always in home)
+        ".config/zsh"               # New XDG-style zsh config directory
+        ".config/wezterm"           # WezTerm config directory
+        ".config/starship.toml"     # Starship prompt config
+        ".config/zellij"            # Zellij config directory
+        ".config/nvim"              # Neovim config directory
+        ".config/brew"              # Homebrew Brewfile directory
+        ".config/Makefile"          # Development Makefile
+    )
 
     for file in "${files[@]}"; do
         if [[ -e "$HOME/$file" ]]; then
@@ -74,57 +85,14 @@ backup_dotfiles() {
 }
 
 # ============================================================================
-# INSTALL HOMEBREW
-# ============================================================================
-
-install_homebrew() {
-    if command_exists brew; then
-        print_success "Homebrew already installed"
-        return
-    fi
-
-    print_header "Installing Homebrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-    # Add Homebrew to PATH for Apple Silicon
-    if [[ $(uname -m) == "arm64" ]]; then
-        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    fi
-
-    print_success "Homebrew installed"
-}
-
-# ============================================================================
-# INSTALL TOOLS VIA BREWFILE
+# INSTALL HOMEBREW AND TOOLS
 # ============================================================================
 
 install_tools() {
-    print_header "Installing tools via Brewfile"
-
-    cd "$HOME/.dotfiles" || exit 1
-
-    if [[ ! -f "Brewfile" ]]; then
-        print_error "Brewfile not found!"
-        exit 1
-    fi
-
-    print_info "Running: brew bundle install"
-    brew bundle install
-
-    print_success "Core tools installed from Brewfile"
-
-    # Install from local Brewfile if it exists
-    if [[ -f "$HOME/Brewfile.local" ]]; then
-        print_info "Found Brewfile.local, installing machine-specific tools..."
-        brew bundle install --file="$HOME/Brewfile.local"
-        print_success "Machine-specific tools installed from Brewfile.local"
-    else
-        print_info "No Brewfile.local found (optional)"
-        print_info "To add machine-specific tools, copy Brewfile.local.example to ~/Brewfile.local"
-    fi
-
-    cd - > /dev/null
+    print_header "Installing Homebrew and tools"
+    print_info "Running: make brew-bundle-install"
+    make -f make/.config/Makefile brew-bundle-install
+    print_success "All tools installed"
 }
 
 # ============================================================================
@@ -133,18 +101,9 @@ install_tools() {
 
 stow_dotfiles() {
     print_header "Symlinking dotfiles with GNU Stow"
-
-    cd "$HOME/.dotfiles" || exit 1
-
-    local packages=("wezterm" "zsh" "starship" "zellij" "nvim")
-
-    for package in "${packages[@]}"; do
-        print_info "Stowing $package..."
-        stow -v "$package" 2>&1 | grep -v "^BUG in find_stowed_path" || true
-        print_success "$package stowed"
-    done
-
-    cd - > /dev/null
+    print_info "Running: make stow"
+    make -f make/.config/Makefile stow
+    print_success "All packages stowed"
 }
 
 # ============================================================================
@@ -193,6 +152,11 @@ post_install() {
     else
         print_success "Antidote already installed"
     fi
+
+    # Create success marker file
+    touch "$HOME/.config/_SUCCESS"
+    print_info "Installation marker created at ~/.config/_SUCCESS"
+    
 }
 
 # ============================================================================
@@ -224,9 +188,14 @@ main() {
         exit 1
     fi
 
+    # Change to dotfiles directory
+    cd "$HOME/.dotfiles" || {
+        print_error "Failed to change to ~/.dotfiles directory"
+        exit 1
+    }
+
     # Run installation steps
     backup_dotfiles
-    install_homebrew
     install_tools
     stow_dotfiles
     set_default_shell
@@ -249,11 +218,19 @@ main() {
     echo "  4. Open Neovim to trigger LazyVim installation: nvim"
     echo "  5. Review configurations in ~/.dotfiles/"
     echo ""
-    print_info "For machine-specific configs, create ~/.zshrc.local"
-    print_info "See ~/.dotfiles/zsh/.zshrc.local.example for examples"
+    print_info "For machine-specific configs:"
+    print_info "  • Zsh: ~/.config/zsh/.zshrc.local"
+    print_info "  • Env: ~/.zshenv.local"
+    print_info "  • Brew: ~/.config/brew/Brewfile.local"
+    print_info "See example files in ~/.dotfiles/ for templates"
+    echo ""
+    print_info "Use 'make -f ~/.config/Makefile help' to see available management commands"
     echo ""
     print_warning "Note: You may need to restart your terminal for all changes to take effect"
     echo ""
+
+    # Change to back to previous directory
+    cd - &> /dev/null
 }
 
 # Run main function

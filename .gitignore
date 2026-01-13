@@ -1,9 +1,13 @@
 # Local machine-specific overrides (not committed)
 *.local
-.zshrc.local
-.zshenv.local
-Brewfile.local
-Brewfile.lock.json
+zsh/.config/zsh/.zshrc.local
+zsh/.config/.zshenv.local
+brew/.config/brew/Brewfile.local
+brew/.config/brew/Brewfile.lock.json
+
+# Zsh generated files
+zsh/.config/zsh/.zcompdump*
+zsh/.config/zsh/.zsh_plugins.zsh
 
 # macOS
 .DS_Store

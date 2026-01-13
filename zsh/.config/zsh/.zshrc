@@ -156,6 +156,6 @@ fi
 # ============================================================================
 # Source machine-specific configuration if it exists
 # Use this for work-specific configs, local PATH additions, etc.
-if [[ -f "$HOME/.zshrc.local" ]]; then
-  source "$HOME/.zshrc.local"
+if [[ -f "$HOME/.config/zsh/.zshrc.local" ]]; then
+  source "$HOME/.config/zsh/.zshrc.local"
 fi
