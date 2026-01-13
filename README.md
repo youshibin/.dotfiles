@@ -19,7 +19,7 @@ A portable, keyboard-focused terminal development environment optimized for prod
 
 1. **Clone this repository**
    ```bash
-   git clone <your-repo-url> ~/.dotfiles
+   git clone https://github.com/youshibin/.dotfiles ~/.dotfiles
    cd ~/.dotfiles
    ```
 
