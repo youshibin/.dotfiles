@@ -9,6 +9,12 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+-- START MAXIMIZED
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
+
 -- ============================================================================
 -- COLOR SCHEME
 -- ============================================================================
@@ -16,7 +22,7 @@ end
 -- Try different ones and see what you like!
 
 -- config.color_scheme = "Catppuccin Mocha"
--- config.color_scheme = "Tokyo Night"
+config.color_scheme = "Tokyo Night"
 -- config.color_scheme = "Gruvbox Dark (Gogh)"
 -- config.color_scheme = "Nord"
 -- config.color_scheme = "Dracula"
