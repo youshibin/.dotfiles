@@ -159,3 +159,10 @@ fi
 if [[ -f "$HOME/.config/zsh/.zshrc.local" ]]; then
   source "$HOME/.config/zsh/.zshrc.local"
 fi
+
+# ============================================================================
+# Auto-start Zellij
+# ============================================================================
+if [[ -z "$ZELLIJ" ]]; then
+  zellij attach main -c
+fi
