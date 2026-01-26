@@ -32,6 +32,12 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # ============================================================================
+# XDG Compliance for shared tools
+# ============================================================================
+export LESSHISTFILE="$XDG_DATA_HOME/less/history"
+export HSTS_FILE="$XDG_DATA_HOME/wget/hsts"
+
+# ============================================================================
 # PATH
 # ============================================================================
 # Homebrew (Apple Silicon)
