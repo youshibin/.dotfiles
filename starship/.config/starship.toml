@@ -1,6 +1,9 @@
 # Starship Prompt Configuration
 # Docs: https://starship.rs/config/
 
+# No blank line before prompt
+add_newline = false
+
 # Use custom format
 format = """
 (bold green)$username[@](bold white)$hostname[:](bold white)$directory$git_branch$git_status$git_state
