@@ -1,0 +1,13 @@
+# Machine-Specific Git Configuration
+# Copy this file to config.local and customize for your machine
+# cp config.local.example config.local
+
+[user]
+	name = Your Name
+	email = your.email@example.com
+
+[credential]
+	# macOS
+	helper = osxkeychain
+	# Linux (uncomment if needed)
+	# helper = store

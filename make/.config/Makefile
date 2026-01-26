@@ -55,7 +55,7 @@ ZSHRC := $(CONFIG_DIR)/zsh/.zshrc
 ZSHRC_LOCAL := $(CONFIG_DIR)/zsh/.zshrc.local
 
 # All packages that can be stowed
-ALL_PACKAGES := brew make nvim starship wezterm zellij zsh
+ALL_PACKAGES := brew git make nvim starship wezterm zellij zsh
 
 # Default to all packages if PACKAGES not specified
 PACKAGES ?= $(ALL_PACKAGES)
@@ -229,6 +229,14 @@ stow-check:
 					echo "  ✓ brew symlink exists"; \
 				else \
 					echo "  ✗ brew symlink missing"; \
+					all_good=false; \
+				fi \
+				;; \
+			git) \
+				if [ -L "$(HOME)/.config/git/config" ]; then \
+					echo "  ✓ git symlink exists"; \
+				else \
+					echo "  ✗ git symlink missing"; \
 					all_good=false; \
 				fi \
 				;; \

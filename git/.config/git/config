@@ -1,0 +1,20 @@
+# Shared Git Configuration
+[core]
+	autocrlf = false
+	editor = nvim
+	longpaths = true
+	pager = less -F -X
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = false
+
+[pager]
+	branch = false
+	stash = false
+
+# Machine-Specific Git Configuration
+[include]
+	path = config.local
