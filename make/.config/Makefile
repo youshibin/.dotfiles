@@ -18,8 +18,8 @@ help:
 	@echo "  make brew-bundle-upgrade       - Upgrade packages via brew bundle"
 	@echo ""
 	@echo "Shell Configuration:"
-	@echo "  make source                    - Source ~/.config/zsh/.zshrc"
-	@echo "  make source-local              - Source ~/.config/zsh/.zshrc.local"
+	@echo "  make source                    - Show how to reload shell config"
+	@echo "  make source-check              - Test .zshrc syntax"
 	@echo ""
 	@echo "Stow Management:"
 	@echo "  make stow                      - Stow all packages"
@@ -52,7 +52,6 @@ BREWFILE := $(BREW_DIR)/Brewfile
 BREWFILE_LOCAL := $(BREW_DIR)/Brewfile.local
 
 ZSHRC := $(CONFIG_DIR)/zsh/.zshrc
-ZSHRC_LOCAL := $(CONFIG_DIR)/zsh/.zshrc.local
 
 # All packages that can be stowed
 ALL_PACKAGES := brew git make nvim starship wezterm zellij zsh
@@ -120,26 +119,23 @@ brew-bundle-upgrade: brew
 # SHELL CONFIGURATION
 # ============================================================================
 
-# `make source` sources the main zshrc
+# `make source` reminds user how to reload their shell
+# (make targets run in subshells, so they can't affect the current shell)
 .PHONY: source
 source:
+	@echo "To reload your shell config, run one of:"
+	@echo "  reload                         - alias defined in .zshrc"
+	@echo "  source ~/.config/zsh/.zshrc    - reload .zshrc directly"
+	@echo "  exec zsh                       - restart shell (reloads .zshenv too)"
+
+# `make source-check` tests that .zshrc can be sourced without errors
+.PHONY: source-check
+source-check:
 	@if [ -f "$(ZSHRC)" ]; then \
-		echo "Sourcing $(ZSHRC)..."; \
-		zsh -c "source $(ZSHRC) && echo 'Successfully sourced .zshrc'"; \
+		echo "Testing $(ZSHRC)..."; \
+		zsh -c "source $(ZSHRC) && echo '✓ .zshrc syntax OK'"; \
 	else \
 		echo "Error: $(ZSHRC) not found"; \
-		exit 1; \
-	fi
-
-# `make source-local` sources the local zshrc overrides
-.PHONY: source-local
-source-local:
-	@if [ -f "$(ZSHRC_LOCAL)" ]; then \
-		echo "Sourcing $(ZSHRC_LOCAL)..."; \
-		zsh -c "source $(ZSHRC_LOCAL) && echo 'Successfully sourced .zshrc.local'"; \
-	else \
-		echo "Error: $(ZSHRC_LOCAL) not found"; \
-		echo "Create it from the example: cp $(DOTFILES_DIR)/zsh/.config/zsh/.zshrc.local.example $(ZSHRC_LOCAL)"; \
 		exit 1; \
 	fi
 
