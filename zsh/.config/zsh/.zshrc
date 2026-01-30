@@ -134,8 +134,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # Quick config edits
-alias zshconfig='$EDITOR ~/.zshrc'
-alias zshlocal='$EDITOR ~/.zshrc.local'
+alias zshconfig='$EDITOR ~/.config/zsh/.zshrc'
+alias zshlocal='$EDITOR ~/.config/zsh/.zshrc.local'
 
 # Reload zsh config
 alias reload='source ~/.zshrc'
