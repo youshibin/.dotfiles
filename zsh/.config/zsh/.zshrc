@@ -141,6 +141,14 @@ alias zshlocal='$EDITOR ~/.config/zsh/.zshrc.local'
 alias reload='source ~/.config/zsh/.zshrc'
 
 # ============================================================================
+# DIRENV
+# ============================================================================
+# Load/unload environment variables based on .envrc files in directories
+if command -v direnv &> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
+# ============================================================================
 # STARSHIP PROMPT
 # ============================================================================
 # Initialize Starship prompt (must be at the end of .zshrc)
