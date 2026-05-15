@@ -153,6 +153,15 @@ post_install() {
         print_success "Antidote already installed"
     fi
 
+    # Set up Docker Compose CLI plugin
+    if command_exists docker-compose; then
+        local docker_cli_plugins="${DOCKER_CONFIG:-$HOME/.docker}/cli-plugins"
+        mkdir -p "$docker_cli_plugins"
+        ln -sfn "$(brew --prefix)/opt/docker-compose/bin/docker-compose" \
+            "$docker_cli_plugins/docker-compose"
+        print_success "Docker Compose CLI plugin linked"
+    fi
+
     # Create success marker file
     touch "$HOME/.config/_SUCCESS"
     print_info "Installation marker created at ~/.config/_SUCCESS"
