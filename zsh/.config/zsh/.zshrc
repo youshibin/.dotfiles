@@ -164,5 +164,5 @@ fi
 # Auto-start Zellij
 # ============================================================================
 if [[ -z "$ZELLIJ" ]]; then
-  zellij attach main -c
+  exec zellij attach main -c
 fi

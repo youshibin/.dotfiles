@@ -10,9 +10,10 @@ if wezterm.config_builder then
 end
 
 -- START MAXIMIZED
-wezterm.on('gui-startup', function(cmd)
-  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
+wezterm.on('gui-attached', function(domain)
+  for _, window in ipairs(wezterm.mux.all_windows()) do
+    window:gui_window():maximize()
+  end
 end)
 
 -- ============================================================================
