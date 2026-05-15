@@ -87,6 +87,14 @@ config.audible_bell = "Disabled"
 -- Zellij handles multiplexing (tabs/panes/sessions)
 
 config.keys = {
+	-- Workaround for Zellij treating Shift+Enter as plain Enter
+	-- Sends bracketed paste sequence to insert newline without executing
+	-- See: https://github.com/zellij-org/zellij/issues/4159
+	{
+		key = "Enter",
+		mods = "SHIFT",
+		action = wezterm.action.SendString("\x1b[200~\n\x1b[201~"),
+	},
 }
 
 -- ============================================================================
