@@ -54,7 +54,7 @@ BREWFILE_LOCAL := $(BREW_DIR)/Brewfile.local
 ZSHRC := $(CONFIG_DIR)/zsh/.zshrc
 
 # All packages that can be stowed
-ALL_PACKAGES := brew git make nvim starship wezterm zellij zsh
+ALL_PACKAGES := brew git make nvim playwright starship wezterm zellij zsh
 
 # Default to all packages if PACKAGES not specified
 PACKAGES ?= $(ALL_PACKAGES)
@@ -173,7 +173,7 @@ stow-check:
 		echo "Checking $$package..."; \
 		case $$package in \
 			wezterm) \
-				if [ -L "$(HOME)/.config/wezterm/wezterm.lua" ]; then \
+				if [ -L "$(HOME)/.config/wezterm" ]; then \
 					echo "  ✓ wezterm symlink exists"; \
 				else \
 					echo "  ✗ wezterm symlink missing"; \
@@ -181,10 +181,10 @@ stow-check:
 				fi \
 				;; \
 			zsh) \
-				if [ -L "$(HOME)/.config/zsh/.zshrc" ]; then \
-					echo "  ✓ zsh symlinks exist"; \
+				if [ -L "$(HOME)/.config/zsh" ]; then \
+					echo "  ✓ zsh symlink exists"; \
 				else \
-					echo "  ✗ zsh symlinks missing"; \
+					echo "  ✗ zsh symlink missing"; \
 					all_good=false; \
 				fi \
 				;; \
@@ -197,7 +197,7 @@ stow-check:
 				fi \
 				;; \
 			zellij) \
-				if [ -L "$(HOME)/.config/zellij/config.kdl" ]; then \
+				if [ -L "$(HOME)/.config/zellij" ]; then \
 					echo "  ✓ zellij symlink exists"; \
 				else \
 					echo "  ✗ zellij symlink missing"; \
@@ -205,7 +205,7 @@ stow-check:
 				fi \
 				;; \
 			nvim) \
-				if [ -L "$(HOME)/.config/nvim/init.lua" ]; then \
+				if [ -L "$(HOME)/.config/nvim" ]; then \
 					echo "  ✓ nvim symlink exists"; \
 				else \
 					echo "  ✗ nvim symlink missing"; \
@@ -221,7 +221,7 @@ stow-check:
 				fi \
 				;; \
 			brew) \
-				if [ -L "$(HOME)/.config/brew/Brewfile" ]; then \
+				if [ -L "$(HOME)/.config/brew" ]; then \
 					echo "  ✓ brew symlink exists"; \
 				else \
 					echo "  ✗ brew symlink missing"; \
@@ -233,6 +233,14 @@ stow-check:
 					echo "  ✓ git symlink exists"; \
 				else \
 					echo "  ✗ git symlink missing"; \
+					all_good=false; \
+				fi \
+				;; \
+			playwright) \
+				if [ -L "$(HOME)/.config/playwright" ] && [ -L "$(HOME)/.local/bin/playwright-qa" ]; then \
+					echo "  ✓ playwright symlinks exist"; \
+				else \
+					echo "  ✗ playwright symlinks missing"; \
 					all_good=false; \
 				fi \
 				;; \

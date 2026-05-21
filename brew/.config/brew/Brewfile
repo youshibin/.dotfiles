@@ -30,6 +30,7 @@ brew "git"                  # Distributed version control system
 brew "gh"                   # GitHub command-line tool
 brew "htop"                 # Interactive process viewer
 brew "jq"                   # JSON processor
+brew "node"                 # JavaScript runtime
 brew "stow"                 # Symlink farm manager (for dotfiles)
 brew "wget"                 # File downloader (alternative to curl)
 brew "yq"                   # YAML processor
