@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Run Playwright QA tests against a locally running app.
+#
+# Usage:
+#   BASE_URL=http://localhost:3000 playwright-qa
+#   BASE_URL=http://localhost:8080 playwright-qa --headed
+#   playwright-qa --list
+
+export NODE_PATH="$(npm root -g)"
+exec npx playwright test \
+  --config ~/.config/playwright/playwright.config.js \
+  "$@"

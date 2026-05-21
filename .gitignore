@@ -1,5 +1,8 @@
 # Local machine-specific overrides (not committed)
 *.local
+# Exception: playwright stow package uses .local as an XDG directory, not an override file
+!playwright/.local/
+!playwright/.local/**
 zsh/.config/zsh/.zshrc.local
 zsh/.config/.zshenv.local
 brew/.config/brew/Brewfile.local
