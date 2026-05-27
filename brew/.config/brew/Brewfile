@@ -7,7 +7,6 @@
 brew "zsh"                  # Shell (usually pre-installed on macOS)
 brew "starship"             # Cross-shell prompt
 brew "zellij"               # Terminal multiplexer
-cask "visual-studio-code"   # Code editor
 cask "wezterm"              # GPU-accelerated terminal emulator
 
 # ============================================================================
