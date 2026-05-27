@@ -90,8 +90,27 @@ backup_dotfiles() {
 
 install_tools() {
     print_header "Installing Homebrew and tools"
-    print_info "Running: make brew-bundle-install"
-    make -f make/.config/Makefile brew-bundle-install
+
+    # Install Homebrew if not already present
+    if ! command_exists brew; then
+        print_info "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    else
+        print_success "Homebrew already installed"
+    fi
+
+    # On Apple Silicon, Homebrew installs to /opt/homebrew which may not be in
+    # PATH yet in this session. Source shellenv so brew is available for all
+    # subsequent commands (including the make subprocess).
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+
+    # Use the repo Brewfile directly — stow hasn't run yet so ~/.config/brew
+    # doesn't exist, and we can't rely on the Makefile's post-install path logic.
+    local brewfile="$HOME/.dotfiles/brew/.config/brew/Brewfile"
+    print_info "Running: brew bundle install --file $brewfile"
+    brew bundle install --file "$brewfile"
     print_success "All tools installed"
 }
 
